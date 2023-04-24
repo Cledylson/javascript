@@ -1,1 +1,1 @@
-https://cledylson.github.io/javascript/
+https://cledylson.github.io/javascript/index.html
