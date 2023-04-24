@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lâmpada JavaScript</title>
+	<style>
+		#lampada {
+			width: 100px;
+			height: 100px;
+			background-color: gray;
+			border-radius: 50%;
+			margin: 50px auto;
+			position: relative;
+		}
+
+		#lampada:before {
+			content: "";
+			position: absolute;
+			top: -30px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-top: 30px solid yellow;
+			border-left: 20px solid transparent;
+			border-right: 20px solid transparent;
+			border-radius: 0 0 50% 50%;
+		}
+
+		#lampada:after {
+			content: "";
+			position: absolute;
+			bottom: -30px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 50px;
+			height: 20px;
+			background-color: silver;
+			border-radius: 50% 50% 0 0;
+		}
+
+		#botao {
+			display: block;
+			margin: 50px auto;
+			padding: 10px;
+			background-color: blue;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="lampada"></div>
+	<button id="botao">Ligar/Desligar</button>
+
+	<script>
+		// Obtém a lâmpada e o botão
+		var lampada = document.getElementById('lampada');
+		var botao = document.getElementById('botao');
+
+		// Define o estado da lâmpada
+		var ligada = true;
+
+		// Adiciona um ouvinte de evento de clique ao botão
+		botao.addEventListener('click', function() {
+			// Alterna o estado da lâmpada
+			ligada = !ligada;
+
+			// Altera a cor de fundo da lâmpada e o texto do botão
+			if (ligada) {
+				lampada.style.backgroundColor = 'yellow';
+				botao.textContent = 'Desligar';
+			} else {
+				lampada.style.backgroundColor = 'gray';
+				botao.textContent = 'Ligar';
+			}
+		});
+	</script>
+</body>
+</html>
