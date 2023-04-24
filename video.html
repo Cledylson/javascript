@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vídeo do YouTube</title>
+</head>
+<body>
+	<h1>Vídeo do YouTube</h1>
+
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+
+	<script>
+		// Substitua VIDEO_ID pelo ID do vídeo do YouTube que deseja exibir
+		var videoId = '6KY1XTnxwrI';
+
+		// Substitua o atributo "src" do elemento <iframe> com o URL incorporado do vídeo do YouTube
+		var iframe = document.querySelector('iframe');
+		iframe.src = 'https://www.youtube.com/embed/' + videoId;
+	</script>
+</body>
+</html>
