@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Links</title>
+</head>
+<body>
+	<h1>Links para programas em javascript</h1>
+
+	<!-- Formulário para adicionar links -->
+	<form>
+		<label for="titulo">Título do link:</label>
+		<input type="text" id="titulo" name="titulo">
+
+		<label for="url">URL do link:</label>
+		<input type="url" id="url" name="url">
+
+		<button type="submit">Adicionar</button>
+	</form>
+
+	<!-- Lista de links adicionados -->
+	<ul id="links">
+	</ul>
+
+	<script>
+		// Obtém o formulário e a lista de links
+		var form = document.querySelector('form');
+		var listaLinks = document.getElementById('links');
+
+		// Adiciona um evento de envio de formulário
+		form.addEventListener('submit', function(evento) {
+			evento.preventDefault();
+
+			// Obtém o título e a URL do link adicionado
+			var titulo = form.titulo.value;
+			var url = form.url.value;
+
+			// Cria um novo item da lista de links
+			var itemLista = document.createElement('li');
+			var link = document.createElement('a');
+			link.textContent = titulo;
+			link.href = url;
+			link.target = '_blank';
+			itemLista.appendChild(link);
+			listaLinks.appendChild(itemLista);
+
+			// Limpa os campos do formulário
+			form.titulo.value = '';
+			form.url.value = '';
+		});
+	</script>
+</body>
+</html>
