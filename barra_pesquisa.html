@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Pesquisa Google e Bing</title>
+  </head>
+  <body>
+    <h1>Barra de Pesquisa Google e Bing</h1>
+    <h3>Pesquisa no Google</h3>
+    <input type="text" id="google-search" placeholder="Pesquisa Google">
+    <br><br>
+    <h3>Pesquisa no Bing</h3>
+    <input type="text" id="bing-search" placeholder="Pesquisa Bing">
+    
+    <script>
+      // Função para executar a pesquisa no Google
+      
+      function googleSearch() {
+        const searchQuery = document.getElementById("google-search").value;
+        const url = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery);
+        window.open(url, "_blank");
+      }
+      
+      // Função para executar a pesquisa no Bing
+      function bingSearch() {
+        const searchQuery = document.getElementById("bing-search").value;
+        const url = "https://www.bing.com/search?q=" + encodeURIComponent(searchQuery);
+        window.open(url, "_blank");
+      }
+      
+      // Adiciona um evento de pressionar Enter na barra de pesquisa do Google
+      document.getElementById("google-search").addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) { // 13 é o código da tecla Enter
+          googleSearch();
+        }
+      });
+      
+      // Adiciona um evento de pressionar Enter na barra de pesquisa do Bing
+      document.getElementById("bing-search").addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) { // 13 é o código da tecla Enter
+          bingSearch();
+        }
+      });
+    </script>
+  </body>
+</html>
