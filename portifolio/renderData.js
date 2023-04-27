@@ -1,138 +1,151 @@
-const initLightMode = () => {
-    document.querySelector('input[type="checkbox"]').addEventListener('change', () => {
-      document.body.classList.toggle('light-mode')
+const closeModalAction = document.querySelector('.modal .ri-close-line')
+const modal = document.querySelector('.modal')
+const modalTitle = modal.querySelector('.title h2')
+const modalDescription = modal.querySelector('.info p')
+const modalDate = modal.querySelector('span')
+const modalLinkProject = modal.querySelector('.links a.link-project')
+const modalLinkRepository = modal.querySelector('.links a.link-repository')
+const modalLinkLinkedin = modal.querySelector('.links a.link-linkedin')
+const iframe = modal.querySelector('.video iframe')
+const highlightsProjectsContainer = document.querySelector('.highlights .cards-projects');
+const allProjectsContainer = document.querySelector('.allprojects .cards-projects');
+const HIGHTLIGHT_TYPE = 2;
+const ALL_TYPE = 1;
+
+const getProjectsByTypeOrAll = (typeId) => {
+  const dataProjects = [
+    {
+     //Para Futuros Projetos
+     
+      site:'https://github.com/Cledylson/Cledylson/'
+
+    },
+ 
+  ];
+
+  //return typeId ? dataProjects.filter(({ type }) => type === typeId) : dataProjects;
+}
+
+const allProjects = getProjectsByTypeOrAll(ALL_TYPE);
+const hightLightProjects = getProjectsByTypeOrAll(HIGHTLIGHT_TYPE);
+
+//Em construção
+const renderProjects = (container, data) => {
+  container.innerHTML = data.map(({ id, title, imgSrc, date, languages }) => {
+    return `
+        <div class="box" id="${id}">
+          <div class="cover">
+            <img src=${imgSrc} alt="dowhile 2021">
+            <div class="details">
+              <p>${title}</p>
+              <div class="mini-languages">
+                ${languages.map((language) => `<img src="${language}.svg" alt="${language}">`)}
+              </div>
+            </div>
+          </div>
+          <div class="description">
+            <p>${date}</p>
+            <a>Ver mais</a>
+          </div>
+        </div>
+      `
+  }).join('');
+}
+
+const renderSkillsSection = () => {
+  const cardsContainer = document.querySelector('.cards');
+
+  const skills = [
+    {
+      name: 'HTML',
+      src: 'html'
+    },
+    {
+      name: 'CSS',
+      src: 'css'
+    },
+    {
+      name: 'JavaScript',
+      src: 'javascript'
+    },
+    {
+      name: 'CorelDraw',
+      src: 'cdr'
+    },
+    {
+      name: 'Python',
+      src: 'py'
+    },
+    {
+      name: 'Ruby',
+      src: 'ruby'
+    },
+    {
+      name: 'Kali - Linux',
+      src: 'linux'
+    },
+    {
+      name: 'Windows',
+      src: 'windows'
+    },
+    {
+      name: 'MySQL',
+      src: 'mysql'
+    }
+ 
+  ]
+
+  cardsContainer.innerHTML = skills.map(({ name, src }, index) => `
+    <div class="box" key="${index}">
+      <p>${name}</p>
+      <img src="./icon_skill/${src}.svg" alt="html">
+    </div>
+  `).join('')
+}
+
+const addData = ({ title, description, date, site, repository, linkedin, videoSrc }) => {
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  document.body.classList.add('transparent')
+  modalTitle.innerHTML = title
+  modalDescription.innerHTML = description
+  modalDate.innerHTML = date
+  modalLinkProject.setAttribute('href', site)
+  modalLinkRepository.setAttribute('href', repository)
+  modalLinkLinkedin.setAttribute('href', linkedin)
+  iframe.setAttribute('src', videoSrc + '?autoplay=1&amp;loop=0')
+
+}
+
+const insertProjectAction = () => {
+  projectsBox.forEach((project) => {
+    const id = Number(project.getAttribute('id'));
+
+    project.addEventListener('click', () => {
+      const allProjects = getProjectsByTypeOrAll();
+      const foundProject = allProjects.find((project) => project.id === id);
+      addData(foundProject);
     })
-  
-  }
-  
-  const initOpenMenu = () => {
-    const menuBtn = document.querySelector('header .menu i')
-    const closeBtn = document.querySelector('header .menu i:nth-child(2)')
-    const menu = document.querySelector('.menuOpen');
-    const header = document.querySelector('header')
-  
-    const close = () => {
-      menu.classList.add('hidden')
-      menuBtn.classList.remove('hidden')
-      closeBtn.classList.add('hidden')
-      document.body.style.overflow = 'visible';
-      header.classList.remove('open')
-  
-    }
-  
-    const open = () => {
-      menu.classList.remove('hidden')
-      menuBtn.classList.add('hidden')
-      closeBtn.classList.remove('hidden')
-      document.body.style.overflow = 'hidden';
-      header.classList.add('open')
-    }
-  
-    menuBtn.addEventListener('click', open)
-  
-    closeBtn.addEventListener('click', close)
-  
-    document.addEventListener('keydown', ({ key }) => key === "Escape" && close());
-  
-    const links = document.querySelectorAll('nav a')
-  
-    links.forEach(link => {
-      link.addEventListener('click', close)
-    })
-  
-  }
-  
-  const initAnimationScroll = () => {
-    const sections = document.querySelectorAll('.js-section')
-  
-    const windowHalfSize = window.innerHeight * 0.6
-  
-    const animateScroll = () => {
-      sections.forEach(item => {
-        const sectionTop = item.getBoundingClientRect().top
-  
-        const isSectionVisible = (sectionTop - windowHalfSize) < 0
-  
-        if (isSectionVisible) {
-          item.classList.add('active')
-        } else {
-          item.classList.remove('active')
-        }
-  
-      })
-  
-    }
-  
-    animateScroll()
-    window.addEventListener('scroll', animateScroll)
-  
-  }
-  
-  const initScrollSmooth = () => {
-  
-    const linksInternos = document.querySelectorAll('nav a')
-  
-    linksInternos.forEach(item => {
-      const scrollToSection = (event) => {
-        event.preventDefault()
-        const href = event.currentTarget.getAttribute('href');
-        const section = document.querySelector(href)
-  
-        window.scrollTo({
-          top: section.offsetTop - 100
-        })
-      }
-      item.addEventListener('click', scrollToSection)
-    })
-  }
-  
-  const initTypingAnimation = () => {
-    const title = document.querySelector('#sobre .banner h1')
-    const span = document.querySelector('#sobre .banner span')
-    const paragraph = document.querySelector('#sobre .banner p')
-  
-    const typingAnimation = (element) => {
-  
-      if (element == title) {
-        element.innerHTML = 'Olá, eu sou o '
-        const textToArray = element.innerHTML.split('')
-        element.innerHTML = ''
-  
-        textToArray.forEach((item, index) => {
-          setTimeout(() => element.innerHTML += item, 120 * index)
-        })
-  
-      } else if (element == span) {
-        element.innerHTML = 'Augusto Takamori =]'
-        const textToArray = element.innerHTML.split('')
-        element.innerHTML = ''
-  
-        textToArray.forEach((item, index) => {
-          setTimeout(() => element.innerHTML += item, 150 * index)
-        })
-  
-      } else {
-        element.innerHTML = 'Desenvolvedor Front-End | Python | JavaScript | Ruby | MySql'
-        const textToArray = element.innerHTML.split('')
-        element.innerHTML = ''
-  
-        textToArray.forEach((item, index) => {
-          setTimeout(() => element.innerHTML += item, 75 * index)
-        })
-  
-      }
-  
-    }
-  
-    typingAnimation(title)
-    setTimeout(() => typingAnimation(span), 1600)
-    setTimeout(() => typingAnimation(paragraph), 3700)
-  
-  }
-  
-  initOpenMenu()
-  initAnimationScroll()
-  initScrollSmooth()
-  initLightMode()
-  initTypingAnimation()
-  
+  });
+}
+
+const closeModal = () => {
+  modal.classList.add('hidden')
+  document.body.style.overflow = 'visible';
+  document.body.classList.remove('transparent')
+  iframe.setAttribute('src', '')
+
+}
+
+const detectCloseModal = () => {
+  closeModalAction.addEventListener('click', closeModal)
+  document.addEventListener('keydown', ({ key }) => key === "Escape" && closeModal());
+}
+
+renderSkillsSection();
+//renderProjects(highlightsProjectsContainer, hightLightProjects);
+//renderProjects(allProjectsContainer, allProjects);
+const projectsBox = document.querySelectorAll('.box');
+detectCloseModal();
+insertProjectAction();
+
