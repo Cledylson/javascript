@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <link rel="stylesheet" href="./num.css">
+    <title>Analizador de numeros </title>
+</head>
+<body>
+    <header>
+        <h1>  Analizador de numeros </h1>
+    </header>
+    <section>
+        <div>
+           Numero :
+           <input type="number" name="numero" id="numero">
+           <input type="button" value="Adicionar" onclick="adicionar()">
+           <br><br><select name="lista" id="lista" size="6"></select>
+           <input type="button" value="Finalizar" onclick="finalizar()">
+           
+
+        </div>
+        <div id="resultado">
+           
+        </div>
+    </section>
+    
+    <script src="./num.js"></script>
+</body>
+</html>
